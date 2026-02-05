@@ -1,10 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PokemonList from "../components/pokemon/PokemonList";
 import PokemonModal from "../components/pokemon/PokemonModal";
 import PokemonSearch from "../components/pokemon/PokemonSearch";
+import axios from "axios";
+import LoadingSpinner from "../components/common/LoadingSpinner";
+import ErrorMessage from "../components/common/ErrorMessage";
+import ErrorBoundary from "../components/common/ErrorBoundary";
 
 function PokemonsPage() {
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const [allPokemons, setAllPokemons] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://pokeapi.co/api/v2/pokemon/?limit=50")
+      .then(({ data }) => setAllPokemons(data.results))
+      .catch((err) => {
+        setError(err.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
+  if (error) {
+    return <ErrorMessage message={error} />;
+  }
   return (
     <div className="min-h-screen bg-linear-to-br from-slate-50 via-blue-50 to-indigo-50 px-7 py-5">
       <h1 className="pb-2 text-center text-3xl font-semibold text-slate-800">
@@ -17,7 +45,12 @@ function PokemonsPage() {
 
       <div className="mx-auto max-w-7xl">
         <PokemonSearch />
-        <PokemonList onCardClick={() => setOpen(true)} />
+        <ErrorBoundary level="page">
+          <PokemonList
+            onCardClick={() => setOpen(true)}
+            pokemons={allPokemons}
+          />
+        </ErrorBoundary>
       </div>
 
       <PokemonModal isOpen={open} onClose={() => setOpen(false)} />
