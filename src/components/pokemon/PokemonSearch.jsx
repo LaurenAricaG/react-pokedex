@@ -1,6 +1,6 @@
 import { Search } from "lucide-react";
 
-function PokemonSearch() {
+function PokemonSearch({ onChange }) {
   return (
     <div className="mx-auto mb-6 max-w-md">
       <div className="relative w-full">
@@ -10,8 +10,10 @@ function PokemonSearch() {
         />
 
         <input
+          onChange={onChange}
           type="text"
           placeholder="Buscar Pokémon..."
+          autoComplete="off"
           className="
             w-full rounded-xl border border-slate-300
             bg-slate-100 py-2.5 pl-10 pr-4

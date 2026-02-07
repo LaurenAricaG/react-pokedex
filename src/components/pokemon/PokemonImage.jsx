@@ -1,8 +1,7 @@
 import { useState } from "react";
 import LoadingSpinner from "../common/LoadingSpinner";
 
-const FALLBACK_IMAGE =
-  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png";
+const FALLBACK_IMAGE = "../../../public/no-pokemon-selected.png";
 
 function PokemonImage({ src, alt }) {
   const [loading, setLoading] = useState(true);

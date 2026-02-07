@@ -13,10 +13,18 @@ function PokemonsPage() {
   const [error, setError] = useState(null);
 
   const [allPokemons, setAllPokemons] = useState([]);
+  const [pokemonName, setPokemonName] = useState("");
+
+  const pokemonByName = allPokemons.filter((pokemon) =>
+    pokemon.name.includes(pokemonName),
+  );
+
+  const handleChangePokemonName = (e) =>
+    setPokemonName(e.target.value.toLowerCase());
 
   useEffect(() => {
     axios
-      .get("https://pokeapi.co/api/v2/pokemon/?limit=50")
+      .get("https://pokeapi.co/api/v2/pokemon/?limit=898")
       .then(({ data }) => setAllPokemons(data.results))
       .catch((err) => {
         setError(err.message);
@@ -44,11 +52,11 @@ function PokemonsPage() {
       </p>
 
       <div className="mx-auto max-w-7xl">
-        <PokemonSearch />
+        <PokemonSearch onChange={handleChangePokemonName} />
         <ErrorBoundary level="page">
           <PokemonList
             onCardClick={() => setOpen(true)}
-            pokemons={allPokemons}
+            pokemons={pokemonByName}
           />
         </ErrorBoundary>
       </div>
