@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import PokemonImage from "./PokemonImage";
-import { pokemonColorType } from "../../constans/PokemonColorType";
+import { pokemonColorType } from "../../constans/Pokemon";
 
 function PokemonCard({ onClick, pokemonURL }) {
   const [pokemon, setPokemon] = useState(null);
@@ -15,7 +15,7 @@ function PokemonCard({ onClick, pokemonURL }) {
 
   return (
     <article
-      onClick={onClick}
+      onClick={() => onClick(pokemon)}
       role="button"
       tabIndex={0}
       className="group cursor-pointer rounded-2xl bg-white p-4 shadow-md transition hover:-translate-y-1 hover:shadow-xl"

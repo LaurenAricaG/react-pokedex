@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import PokemonList from "../components/pokemon/PokemonList";
-import PokemonModal from "../components/pokemon/PokemonModal";
 import PokemonSearch from "../components/pokemon/PokemonSearch";
 import axios from "axios";
 import LoadingSpinner from "../components/common/LoadingSpinner";
@@ -8,7 +7,6 @@ import ErrorMessage from "../components/common/ErrorMessage";
 import ErrorBoundary from "../components/common/ErrorBoundary";
 
 function PokemonsPage() {
-  const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -60,8 +58,6 @@ function PokemonsPage() {
           />
         </ErrorBoundary>
       </div>
-
-      <PokemonModal isOpen={open} onClose={() => setOpen(false)} />
     </div>
   );
 }
