@@ -15,12 +15,13 @@ function PokemonSearch({ onChange }) {
           placeholder="Buscar Pokémon..."
           autoComplete="off"
           className="
-            w-full rounded-xl border border-slate-300
-            bg-slate-100 py-2.5 pl-10 pr-4
-            text-slate-800 placeholder-slate-500
-            transition-all
+            w-full rounded-xl py-2.5 pl-10 pr-4 transition-all
+            border border-slate-300 dark:border-slate-700 
             focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500
-            hover:bg-slate-50
+            bg-slate-100 dark:bg-slate-800
+            text-slate-800 dark:text-slate-400
+            placeholder-slate-500
+            hover:bg-slate-50 dark:hover:bg-slate-800/50
           "
         />
       </div>

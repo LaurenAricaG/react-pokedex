@@ -50,6 +50,10 @@ function PokemonsPage() {
     }
   }, [isVisible]);
 
+  useEffect(() => {
+    setLimit(INITIAL_LIMIT);
+  }, [pokemonName]);
+
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -58,12 +62,12 @@ function PokemonsPage() {
     return <ErrorMessage message={error} />;
   }
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-50 via-blue-50 to-indigo-50 px-7 py-5">
-      <h1 className="pb-2 text-center text-3xl font-semibold text-slate-800">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 px-7 py-5">
+      <h1 className="pb-2 text-center text-3xl font-semibold text-slate-800 dark:text-slate-200">
         Lista de Pokémon
       </h1>
 
-      <p className="mb-6 text-center text-slate-500">
+      <p className="mb-6 text-center text-slate-700 dark:text-slate-400">
         Encuentra tu Pokémon favorito
       </p>
 
