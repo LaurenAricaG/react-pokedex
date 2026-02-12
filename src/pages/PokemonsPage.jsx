@@ -1,10 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PokemonList from "../components/pokemon/PokemonList";
 import PokemonSearch from "../components/pokemon/PokemonSearch";
 import axios from "axios";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import ErrorMessage from "../components/common/ErrorMessage";
 import ErrorBoundary from "../components/common/ErrorBoundary";
+import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+
+const INITIAL_LIMIT = 40;
+const INCREASE_LIMIT = 20;
 
 function PokemonsPage() {
   const [loading, setLoading] = useState(true);
@@ -12,6 +16,12 @@ function PokemonsPage() {
 
   const [allPokemons, setAllPokemons] = useState([]);
   const [pokemonName, setPokemonName] = useState("");
+  const [limit, setLimit] = useState(INITIAL_LIMIT);
+
+  const targetObserver = useRef(null);
+
+  const entry = useIntersectionObserver(targetObserver, {});
+  const isVisible = !!entry?.isIntersecting;
 
   const pokemonByName = allPokemons.filter((pokemon) =>
     pokemon.name.includes(pokemonName),
@@ -22,7 +32,7 @@ function PokemonsPage() {
 
   useEffect(() => {
     axios
-      .get("https://pokeapi.co/api/v2/pokemon/?limit=50")
+      .get("https://pokeapi.co/api/v2/pokemon/?limit=898")
       .then(({ data }) => setAllPokemons(data.results))
       .catch((err) => {
         setError(err.message);
@@ -31,6 +41,14 @@ function PokemonsPage() {
         setLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    const maxPokemons = pokemonByName.length;
+    if (isVisible && maxPokemons !== 0) {
+      const newLimit = limit + INCREASE_LIMIT;
+      newLimit > maxPokemons ? setLimit(maxPokemons) : setLimit(newLimit);
+    }
+  }, [isVisible]);
 
   if (loading) {
     return <LoadingSpinner />;
@@ -54,10 +72,12 @@ function PokemonsPage() {
         <ErrorBoundary level="page">
           <PokemonList
             onCardClick={() => setOpen(true)}
-            pokemons={pokemonByName}
+            pokemons={pokemonByName.slice(0, limit)}
           />
         </ErrorBoundary>
       </div>
+      {/* Intersection Observer */}
+      <span ref={targetObserver}></span>
     </div>
   );
 }
