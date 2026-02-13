@@ -8,13 +8,13 @@ const Evolutions = ({ evolutions }) => {
       {evolutions.map((evolution, index) => (
         <article key={evolution.name} className="flex gap-2 items-center">
           {index !== 0 && (
-            <div className="bg-slate-100 p-2 rounded-full text-sm font-bold">
+            <div className="bg-slate-100 dark:bg-slate-700/80 text-slate-800 dark:text-slate-300 p-2 rounded-full text-sm font-bold">
               <span>Lv. {evolution.min_level}</span>
             </div>
           )}
           <button
             onClick={() => showPokemon(evolution.pokemonInfo)}
-            className="hover:bg-slate-100 transition-colors rounded-3xl"
+            className="hover:bg-slate-100 dark:hover:bg-slate-700/80 transition-colors rounded-3xl cursor-pointer"
           >
             <img src={evolution.image} alt="" />
           </button>

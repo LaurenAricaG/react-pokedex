@@ -30,7 +30,7 @@ function App() {
       <button
         onClick={() => setIsDark(!isDark)}
         className="
-          fixed bottom-4 right-4 z-2
+          fixed bottom-4 right-4 z-50
           p-4 rounded-full
           dark:bg-white/90 bg-slate-800/90
           dark:text-slate-600 text-slate-200

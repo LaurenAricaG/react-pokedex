@@ -11,7 +11,9 @@ const PokemonDetail = ({ pokemon }) => {
         <span className="text-slate-400 text-sm font-semibold">
           N° {pokemon?.id}
         </span>
-        <h2 className="font-bold text-2xl capitalize">{pokemon?.name}</h2>
+        <h2 className="font-bold text-2xl capitalize text-slate-800 dark:text-slate-100">
+          {pokemon?.name}
+        </h2>
         <ul className="flex gap-2 justify-center">
           {pokemon?.types.map((type) => (
             <li
@@ -23,28 +25,42 @@ const PokemonDetail = ({ pokemon }) => {
           ))}
         </ul>
         <div>
-          <h4 className="font-bold capitalize">Pokedex Entry</h4>
-          <p className="text-slate-400">{pokemon?.description}</p>
+          <h4 className="font-bold capitalize text-slate-700 dark:text-slate-200">
+            Pokedex Entry
+          </h4>
+          <p className="text-slate-600 dark:text-slate-400">
+            {pokemon?.description}
+          </p>
         </div>
         {/* Altura y peso */}
         <section className="grid grid-cols-2 gap-4">
           <div className="grid gap-2">
-            <h4 className="font-bold capitalize">Height</h4>
-            <span className="bg-slate-100 block rounded-full p-1">0.7m</span>
+            <h4 className="font-bold capitalize text-slate-700 dark:text-slate-200">
+              Height
+            </h4>
+            <span className="bg-slate-100 dark:bg-slate-700/80 text-slate-800 dark:text-slate-300 block rounded-full p-1">
+              0.7m
+            </span>
           </div>
           <div className="grid gap-2">
-            <h4 className="font-bold capitalize">Weight</h4>
-            <span className="bg-slate-100 block rounded-full p-1">6.9kg</span>
+            <h4 className="font-bold capitalize text-slate-700 dark:text-slate-200">
+              Weight
+            </h4>
+            <span className="bg-slate-100 dark:bg-slate-700/80 text-slate-800 dark:text-slate-300 block rounded-full p-1">
+              6.9kg
+            </span>
           </div>
         </section>
         {/* Habilidades */}
         <section className="grid gap-2">
-          <h4 className="font-bold capitalize">Abilities</h4>
+          <h4 className="font-bold capitalize text-slate-700 dark:text-slate-200">
+            Abilities
+          </h4>
           <ul className="grid grid-cols-2 gap-4">
             {pokemon?.abilities.map((ability) => (
               <li
                 key={ability}
-                className="bg-slate-100 block rounded-full p-1 capitalize"
+                className="bg-slate-100 dark:bg-slate-700/80 text-slate-800 dark:text-slate-300 block rounded-full p-1 capitalize"
               >
                 <span>{ability}</span>
               </li>
@@ -53,14 +69,16 @@ const PokemonDetail = ({ pokemon }) => {
         </section>
         {/* Stats */}
         <section className="grid gap-2">
-          <h4 className="font-bold capitalize">Stats</h4>
+          <h4 className="font-bold capitalize text-slate-700 dark:text-slate-200">
+            Stats
+          </h4>
           <ul className="flex justify-center gap-3 flex-wrap">
             {pokemon?.stats.map((stat) => (
               <li
                 className={`p-1 rounded-full ${colorByStat[stat.name]}`}
                 key={stat.name}
               >
-                <div className="bg-green-500 rounded-full w-6.5 aspect-square grid place-content-center">
+                <div className=" rounded-full w-6.5 aspect-square grid place-content-center">
                   <span className="text-[10px] text-white font-semibold">
                     {stat.name}
                   </span>
@@ -71,7 +89,9 @@ const PokemonDetail = ({ pokemon }) => {
           </ul>
         </section>
         <section className="grid gap-2">
-          <h4 className="font-bold capitalize">Evolutions</h4>
+          <h4 className="font-bold capitalize text-slate-700 dark:text-slate-200">
+            Evolutions
+          </h4>
           <Evolutions evolutions={pokemon?.evolutions ?? []} />
         </section>
       </div>

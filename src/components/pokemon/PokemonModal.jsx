@@ -28,12 +28,12 @@ function PokemonModal({ showModal, onCloseModal, pokemon }) {
       >
         <button
           onClick={onCloseModal}
-          className="absolute right-4 top-4 bg-white rounded-md p-1 cursor-pointer hover:opacity-80 transition-opacity"
+          className="absolute right-4 top-4 bg-slate-100 dark:bg-slate-700 rounded-md p-1 cursor-pointer hover:opacity-90 transition-opacity"
         >
-          <X className="w-4 h-4 text-black " strokeWidth={4} />
+          <X className="w-4 h-4 text-black dark:text-white " strokeWidth={4} />
         </button>
 
-        <div className="bg-white rounded-2xl p-5 ">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl p-5 ">
           <PokemonDetail pokemon={pokemon} />
         </div>
       </article>
